@@ -1,0 +1,2155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Undelivered Archives — Arpit Gupta</title>
+<meta name="description" content="Undelivered Archives by Arpit Gupta. MY DIARY MUST THINK, I DIED">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300;1,9..144,600&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#050813;
+  --paper:#f3ecdc;
+  --amber:#ffb454;
+  --teal:#5fd4c4;
+  --dim:#9aa3c0;
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Instrument Sans',system-ui,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px)
+}
+
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+
+*{box-sizing:border-box}
+
+html,body{
+  height:100%;
+  margin:0;
+  background:radial-gradient(#101a3a,#050813);
+  color:var(--paper);
+  font-family:var(--sans);
+  overflow:hidden
+}
+
+canvas{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block
+}
+
+a{color:inherit}
+
+:focus-visible{
+  outline:2px solid var(--amber);
+  outline-offset:3px
+}
+
+header{
+  position:fixed;
+  top:calc(14px + env(safe-area-inset-top,0px));
+  left:0;
+  right:0;
+  display:flex;
+  justify-content:space-between;
+  padding:0 max(18px,3vw);
+  z-index:5;
+  font-size:.85rem
+}
+
+header a{
+  text-decoration:none;
+  margin-left:1.4rem;
+  color:var(--dim);
+  transition:color .3s
+}
+
+header a:hover,
+header a[aria-current]{
+  color:var(--amber)
+}
+
+header .logo{
+  font:italic 600 1.05rem var(--serif);
+  color:var(--paper);
+  margin:0
+}
+
+#view{
+  position:fixed;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  overflow:auto
+}
+
+#view>*{pointer-events:auto}
+
+.home{
+  position:absolute;
+  left:max(18px,5vw);
+  bottom:12vh;
+  max-width:min(720px,90vw);
+  pointer-events:none!important
+}
+
+.home>*{pointer-events:auto}
+
+.home small{
+  letter-spacing:.3em;
+  font-size:.75rem;
+  color:var(--teal)
+}
+
+.home h1{
+  font:300 clamp(3rem,11vw,8.5rem)/.9 var(--serif);
+  margin:.5rem 0 1.2rem;
+  text-shadow:0 0 60px #ffb45455
+}
+
+.home h1 i{
+  font-weight:600;
+  color:var(--amber)
+}
+
+.home p{
+  font:italic 300 1.35rem var(--serif);
+  margin:0 0 2rem;
+  color:var(--paper)
+}
+
+.btn{
+  display:inline-block;
+  padding:.9rem 1.5rem;
+  border:1px solid var(--amber);
+  text-decoration:none;
+  font-size:.85rem;
+  letter-spacing:.14em;
+  margin-right:.8rem;
+  margin-bottom:.6rem;
+  transition:background .3s,color .3s
+}
+
+.btn:hover{
+  background:var(--amber);
+  color:var(--ink)
+}
+
+.stats{
+  position:fixed;
+  left:max(18px,3vw);
+  bottom:calc(12px + env(safe-area-inset-bottom,0px));
+  font-size:.72rem;
+  letter-spacing:.14em;
+  color:var(--dim);
+  z-index:3
+}
+
+.arch{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:0 max(18px,4vw) calc(46px + env(safe-area-inset-bottom,0px));
+  background:linear-gradient(transparent,#050813dd 55%)
+}
+
+.arch h2{
+  font:300 clamp(1.8rem,5vw,3rem) var(--serif);
+  margin:0 0 .3rem
+}
+
+.arch p{
+  color:var(--dim);
+  margin:0 0 1rem;
+  font-size:.9rem
+}
+
+.arch input{
+  background:#ffffff12;
+  border:1px solid #ffffff33;
+  padding:.6rem .9rem;
+  color:var(--paper);
+  font:inherit;
+  width:min(320px,100%);
+  margin-bottom:.8rem
+}
+
+.chips{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap
+}
+
+.chips a{
+  border:1px solid #ffffff33;
+  padding:.5rem .8rem;
+  text-decoration:none;
+  font-size:.85rem;
+  background:#0008;
+  transition:border-color .3s
+}
+
+.chips a:hover{
+  border-color:var(--amber)
+}
+
+.chips small{
+  color:var(--amber);
+  display:block;
+  font-size:.65rem;
+  letter-spacing:.14em
+}
+
+.page{
+  max-width:620px;
+  margin:0 auto;
+  padding:6rem 1.2rem 6rem
+}
+
+.paper{
+  background:var(--paper);
+  color:#1b1610;
+  padding:clamp(1.4rem,6vw,3.4rem);
+  box-shadow:0 0 90px #ffb45444,0 30px 80px #000c;
+  animation:rise 1.1s cubic-bezier(.2,.8,.2,1) both
+}
+
+@keyframes rise{
+  from{
+    opacity:0;
+    transform:translateY(60px) rotateX(25deg)
+  }
+  to{
+    opacity:1;
+    transform:none
+  }
+}
+
+.paper small{
+  display:block;
+  font-size:.7rem;
+  letter-spacing:.2em;
+  color:#7a6a4d;
+  line-height:1.9;
+  border-bottom:1px solid #7a6a4d55;
+  padding-bottom:.9rem;
+  margin-bottom:1.6rem
+}
+
+.paper h1{
+  font:600 1.7rem var(--serif);
+  margin:0 0 1.2rem
+}
+
+.paper pre{
+  font:300 1.3rem/1.8 var(--serif);
+  white-space:pre-wrap;
+  margin:0
+}
+
+.pager{
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  margin-top:1.4rem;
+  font-size:.8rem;
+  letter-spacing:.12em
+}
+
+.pager a{
+  text-decoration:none;
+  color:var(--dim)
+}
+
+.pager a:hover{
+  color:var(--amber)
+}
+
+.about{
+  max-width:560px;
+  padding:7rem 1.2rem 4rem;
+  margin:0 auto;
+  font:300 1.35rem/1.6 var(--serif)
+}
+
+.about small{
+  font:.85rem var(--sans);
+  color:var(--dim);
+  line-height:2;
+  display:block;
+  margin-top:1.4rem
+}
+
+.egg{
+  position:fixed;
+  right:14px;
+  bottom:calc(12px + env(safe-area-inset-bottom,0px));
+  width:14px;
+  height:14px;
+  border:0;
+  background:#ffffff22;
+  border-radius:50%;
+  cursor:pointer;
+  z-index:6
+}
+
+#note{
+  position:fixed;
+  left:50%;
+  top:40%;
+  transform:translateX(-50%);
+  font:italic 300 1.6rem var(--serif);
+  text-align:center;
+  opacity:0;
+  transition:opacity 1.2s;
+  z-index:7;
+  pointer-events:none;
+  max-width:88vw;
+  text-shadow:0 0 30px #000
+}
+
+#note.on{
+  opacity:1
+}
+
+@media(prefers-reduced-motion:reduce){
+  .paper{animation:none}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="c" aria-hidden="true"></canvas>
+
+<header>
+  <a class="logo" href="#/">Arpit Gupta</a>
+  <nav aria-label="Main">
+    <a href="#/" data-r="home">Home</a>
+    <a href="#/archive" data-r="archive">Archive</a>
+    <a href="#/about" data-r="about">About</a>
+  </nav>
+</header>
+
+<main id="view"></main>
+
+<div class="stats" id="stats"></div>
+
+<button class="egg" id="egg" aria-label="A small hidden button"></button>
+
+<div id="note" role="status"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+
+/* =========================================================
+   EDIT CONTENT HERE.
+   One object = one poem = one page (#/poem/<id>).
+   `text` is displayed exactly as written.
+   ========================================================= */
+
+const SITE={
+  tagline:"MY DIARY MUST THINK, I DIED",
+  bio:"Electronics & Communication Engineering student, writer, and observer.",
+  links:{
+    Email:"",
+    Instagram:"",
+    LinkedIn:"",
+    GitHub:""
+  },
+  secret:"NOT EVERYTHING WRITTEN WAS MEANT TO BE SENT.",
+  collections:4
+};
+
+const ph=n=>"[Placeholder — paste Text "+n+" here, exactly as written.]";
+
+const POEMS=[
+{
+  id:"ua-001",
+  no:"I",
+  title:"Text I",
+  collection:"Undelivered Archives",
+  date:"2026-08-17",
+  text:`TEXT 1
+
+Hey!
+
+How are you? I hope you are doing well, and exploring the best of your moments with yourself, your buddy, and maybe new people on the list too... Today is August 17, 2026, and it marks exactly one month since July 17, 2026.
+
+In this period, as the calendar flipped, the month passed us by. Now, a new month is already halfway gone, preparing to welcome the next one with grace. It has literally been 30 days since I tried to text you and reach out. It feels like a long time, but somewhere inside, I still feel like it was only a moment ago when I was begging you, waiting for you, crawling on my toes, my eyes desperate to wash away your indifference—but It failed. I failed, you failed, we failed.
+
+In the last few weeks, I was diagnosed with symptoms of progressive MCI. I know it might not seem like a big issue, but to me, it is nothing short of a nightmare. At a time when I need to prove my worth and potential, I suffer just trying to recall the date I visited the clinic.
+I have no idea how this MCI is affecting me, or what I am actually forgetting. I don't know what details are slipping through my mind or what daily tasks I am missing.
+
+Yet, I still remember all our dates—like May 15, 2025, when we began something that meant the world to me. I can still clearly recall your favorite color, the ice cream flavor you preferred most, your taste in food, your favorite chocolate, and the list of places I saved for us to visit together. I still remember how much we meant to each other, just as I remember every phrase you screamed while walking away.
+I still remember the innocence in your eyes—a clear, unblemished glass through which I once viewed a gentler world. I remember how the air felt when you laughed, wrapping around me like an unexpected autumn draft, light yet lingering, carrying the scent of rain before it falls. I remember how flowers seemed to blossom when you smiled, as if nature itself were a quiet stage hand waiting eagerly for your cue, and the exact, humbling way the sun faded its brightness, folding its golden light into the shadows like a tired performer stepping back when it was your turn to shine.
+
+You began as being a part of my life, and now my life is merely a part of you—a tiny, drifting satellite tethered to an orbit that no longer belongs to me.
+
+I am left wandering through the museum of what we used to be, where every forgotten joke is a dusty portrait and every shared secret is a statue slowly crumbling into salt. The days pass now like ghost ships drifting through a fog, heavy with the weight of things left unsaid. She walked away, taking the light with her, and left me trapped in a room made entirely of mirrors—where no matter which way I turn, I am forced to watch the quiet, agonizing spectacle of my own longing.
+
+I still remember all the things I am now supposed to forget and move on from. It's ironic that while I struggle to remember assignment submission dates, I can't seem to forget the most intimate details of your life.
+Caught in the chaos of trying hard to remember while feeling helpless to forget, I am stuck right in the middle.
+I am stuck between you and me. I failed to be yours, and simultaneously, I am failing to be myself. I am stuck—maybe because I'm stick ,maybe because I am sick.
+
+Arpit Gupta
+17 Aug,2026`
+},
+
+{
+  id:"ua-002",
+  no:"II",
+  title:"Text II",
+  collection:"Undelivered Archives",
+  date:"2026-08-26",
+  text:`TEXT 2
+
+I was never intended to unravel into this broken remnant, nor was she meant to harden into who she has become. We were never destined to morph into this tragic anomaly—and, above all, I was never meant to bleed for her absence with such agonizing precision.
+If my soul ever dared to anchor the abstract concept of eternity to a tangible existence, she was its sole incarnation. She was, is, and shall forever remain an ethereal tapestry woven from starlight and obsidian. In the past, her beauty was a violent dawn—a radiant, untamed eclipse that blinded any alternative future. In the present, even as a distant phantom, her grace exists like moonlight spilling over shattered velvet, haunting and untouchable. And in the unraveling tomorrows, time will only age her into an immortal myth, a sanctuary of breathtaking elegance that no decay can ever tarnish.
+I harbored a quiet, fanatical faith in her permanence. We both swore a silent pact: if anything short of Death itself dared to sever our tether, it would be an irredeemable betrayal of us both.
+Yet, the cosmos tilted. She unearthed someone else—or perhaps she simply unburied her own hidden worth, recognizing her raw vulnerabilities and realizing, with a sudden, chilling clarity, that she was settling for a compromised echo of her potential rather than ascending to her heights. She realized, with devastating accuracy, that she deserved far grander skies than the ones I could provide. It is effortless to cling to someone when the will exists, just as the universe never hesitates to hand you an exit strategy the moment your heart begins to stray. She found her catalyst and stepped away. Yet to say she "abandoned" me feels vulgar—it degrades us both. Let us simply say she chose her own salvation.
+For exactly 1,274 hours—fifty-three agonizing days—I abased myself. I crawled through the ashes of my own pride, sacrificing every drop of dignity without a second thought. Yet she remained a monument of frost, entirely indifferent. On July 17th, at four in the afternoon, I finally gathered the shattered fragments of my self-respect from the cold floor where my desperation had been left to rot. I turned away, never to reach into that abyss again.
+Every passing minute invents a cruel, unfamiliar way to miss her; every hour arrives heavy with a fiercer urge to break, yet I force myself to stand erect against the storm. She flourishes in her new reality, while I slowly acclimate to this stranger I am becoming.
+Strangely, brother, a quiet, solemn peace has begun to settle into my chest each day. Do not mistake this for moving on, nor for forgetting the sanctuary she was, nor for seeking warmth in new faces. It is simply that I have pardoned the universe and absolved her. Now, I am free to adore her, to ache for her, and to hold her memory strictly on my own terms. I no longer require her presence to keep this devotion alive. The love has become entirely self-contained—it lives within me, breathes beside me, and stretches far beyond me.
+The moment she excised her presence from my world, a profound emptiness carved itself into my core. I lay paralyzed, burying myself beneath the cold ashes of my own collapse, only to realize a paradox: so much of me endured despite her departure, yet nothing of value truly remained. I strained to discover my own reflection within this hollow shell, but all my senses register is her—intertwined with every breath, echoing in every pulse, coursing through my veins, consuming my waking thoughts, and haunting my deep unconsciousness.
+The night she told me she was leaving, I couldn't bring myself to lie in bed. I got down and slept straight on the bare floor—because in that moment, nothing in that room except the Earth itself was strong enough to hold the crushing weight of my heart.
+I ought to be the most tranquil soul alive if she had simply chosen her own sovereignty and self-worth over mortal ties; had that been the truth, her departure would carry the weight of peace. But it was not a voluntary step she took—someone else reached into our shared world and pulled her out. The deepest tragedy is that she could never bring herself to accept it, and I was never prepared to expect it.
+ARPIT GUPTA
+26 AUGUST, 2026
+22:46 IST`
+},
+
+{
+  id:"ua-003",
+  no:"III",
+  title:"Text III",
+  collection:"Undelivered Archives",
+  date:"2026-09-03",
+  text:`TEXT 3
+03 SEPT, 2026
+23:10 PM IST
+
+It is an absolute, unyielding law of this fragile human condition that the soul was never destined to dwell in perpetual spring; it is entirely natural, even vital, to inhabit the frigid, sunless winters of your own mind. There exist profound, abyss-like intervals in this fleeting existence when we wander as hollow strangers to our own obsidian reflections—when we draw stolen oxygen into decaying lungs, navigate borrowed, phantom days, and drift beneath a vast, indifferent firmament that remains completely foreign and cold to our touch. Believe me when I whisper from the dark that there is no madness in this crushing alienation; it is merely the quiet, bloody tax we pay for the curse of feeling too deeply.
+No creature can remain forever cocooned within the velvet sanctuary of its original realm. Even as your heart beats its frantic, caged rhythm and your veins measure every surging drop of crimson life like a ticking glass hourglass, time itself waits in the shadows like a patient predator. Somewhere along this winding path, a singular, catastrophic threshold lies in wait to shatter your carefully constructed universe. It arrives to ruthlessly dismantle the grand illusion of permanence, grinding the fragile myth of "forever" into fine dust beneath its heavy heel, teaching us the brutal lesson that true awakening never arrives gently, but strikes with the thunderous impact of a falling sky.
+All that remains scathed and etched into the cemetery of my memory is the fifteenth of May—a date carved into the stone of my mind like an indelible epitaph, when a whispered promise of eternity was laid at my feet. That vow swore to be a quiet grave where all my venomous doubts about fleeting love would finally be buried deep beneath the earth. I used to pride myself on being an impenetrable fortress, fiercely armoring my spirit against such soft, romantic illusions. For agonizing months following the inevitable collapse of that fragile world, I dragged my hollow shell forward, tethered only by the cold grip of gravity—standing with an aching spine beneath a suffocating sky, surviving strictly out of a spiteful, sheer endurance.
+Yet, just as the suffocating weight of existence threatened to reduce my remaining bones to ash, the shadowy cosmos orchestrated a breathtaking, midnight intervention. I had spent an entire lifetime convinced that ethereal beings and enchantments belonged solely to forgotten folklore and the ink-stained pages of dead poets. But in a sudden, luminous collision of harsh reality and impossible wonder, the veil of dark reality was torn asunder, and I witnessed magic breathing in human form. She appeared—not as a spectral phantom of ancient myth, but as living, bleeding poetry—and in that single, shattering instant, transformed the ruin of my scorched landscape forever.
+
+- ARPIT`
+},
+
+{
+  id:"ua-004",
+  no:"IV",
+  title:"Text IV",
+  collection:"Undelivered Archives",
+  date:"2026-09-08",
+  text:`September 8, 2026.
+21:21
+The relentless hands of the clock creep silently toward eleven. In the ordinary rhythm of my life, the surrounding dark would have swallowed me into sleep by now, yet tonight an uninvited ghost of your memory sits heavily at the very edge of my bed.
+It startles and unnerves me to realize that one hundred and one full days have withered into dust since our last genuine, unfiltered conversation. Perhaps, in some twisted way, it was a merciful silence. When the foundation between us had eroded into nothingness, what was left for us to speak of? Why force empty words into the air when every tide had already shifted beneath our feet? It has been two thousand four hundred and thirty-two hours of absolute estrangement, yet this entire reality clings to my skin like a persistent, suffocating fever dream. I keep bargaining with time, praying that my eyes will suddenly snap open in the dark, and the very first glow to greet my face will be that familiar screen notification: "4+ messages."
+I dream of messages completely devoid of battle lines, free from the venom of lingering grudges, quieted of constant complaints, bitter comparisons, or cold, unfeeling critiques. Messages that carry no desperate, rehearsed justifications for whatever you did or chose not to do. All my soul craves are those effortlessly casual, mundane texts—the gentle, rhythmic pulse of a forgotten era when you were by my side. Or perhaps the more accurate, painfully honest phrase would be: when I belonged entirely to you.
+Never mind. It is alright. It is completely acceptable to live as a shattered vessel, to not be whole all the time. The universe rarely bends to accommodate our fragile desires, and we are not entitled to keep everything our hearts bleed for. Perhaps if we were handed everything we wished for, we would lack the wisdom to guard it. Exactly like how I let you slip away through my fingers—drop by painstaking drop, silently, unnoticeably, until you were entirely gone. But now that your presence has turned into a void, not a single minute passes where I can honestly claim I didn't miss you, where I didn't feel your absence like a physical, phantom weight pulling at my chest.
+Once, to feel your presence, I had to open a chat screen. To see your face, I scrolled through static photos in my gallery. To hear the cadence of your voice, I played hidden audio files in my notes app. And to simply admire you, I would stand beneath the heavy shadows of your street, watching your balcony like a devout, patient worshipper waiting for the sky to part. But now, I am left free to adore you on my own solitary terms. I feel you coursing through my veins, pumped straight from the furnace of my heart, animating every fiber, every nerve, and giving a tragic kind of life to every tissue of my body.
+I no longer know who walks down your street to watch you now, or if anyone stands in the cold just to catch a fleeting glimpse of your silhouette. You walk in an expansive freedom that explicitly excludes me—lingering in McDonald’s, meeting people at metro stations, and exploring hidden corners of the city that were never revealed to me. And in truth, I am fighting every urge inside me, trying desperately not to find out where those places are or who walks beside you.
+Do you remember? I had spun so many fragile, golden dreams for the day the walls of your home would finally expand—when your home tuitions would come to an end and coaching classes would grant you a taste of liberty. I envisioned us meeting endlessly, stealing precious hours from the clock, walking side by side, and sitting down in the quiet evening air to share simple momos. But alas... Khair. I know those dreams must sound painfully pathetic, naive, and simple to you now. Ever since you stepped into Allen, surrounded yourself with a new crowd, and breathed in a different world, such small desires became trivial to you. Yet for me, I still carry the vivid memory of waiting hours upon hours just to steal a brief four-second glimpse of your eyes. (And the bitter truth is, I am still doing the exact same thing today.)
+Do you even remember the first time I ever laid eyes on you? You probably don't. Let me summon that quiet ghost for you.
+It was an ordinary, unremarkable evening around 5 PM while we were talking. Out of nowhere, you blurted out, "I'm heading to Thakurganj with Papa, talk in a bit," because you were unexpectedly coming over to Nandu's to eat tikki. We hastily concocted a plan that you would arrive, and I would watch you silently from a distance. When you finally pulled up with your father and Srijan, I stood frozen on the opposite side of the road, staring at you across the traffic—like a bare-footed, helpless child sitting under a massive tree, gazing up in quiet, overwhelming awe at the vastness of an infinite sky.
+Do you remember how utter panic seized my frame that day? Just looking at you made my hands tremble uncontrollably. A sudden, spine-melting weakness overtook my body, and I had to lean my entire weight against a cold concrete wall just to stay upright on my feet. But looking back, that wall was a false, hollow pillar. My real support, my absolute anchor, was always you—the very person who, upon reaching home, sent me fifty different grounding techniques over text to teach me how to feel rooted again.
+My chest is a vault full of stories just like this, but I no longer have a listener to offer them to. In twenty years of my existence, you were the single soul in whose presence I felt safe enough to unspool my deepest vulnerabilities without the fear of judgment. I never feared your criticism or your misunderstanding. I trusted you twenty times more than I ever dared to trust myself. I could dissect my own past decisions with harsh ruthlessness, forever carrying the crippling weight of regret and guilt, but with you, I felt completely protected. I genuinely believed you would never mock my frailties or laugh at my mistakes.
+And for a long time, you built a fortress around that belief, convincing me my trust was sacred—until your Amrit arrived.
+I never knew that to dissolve our solemn "forever," to extinguish every ember of your affection, and to plant your emotional roots in entirely new soil, all it took was a fleeting week or two of acquaintance. With surgical precision and a gentle touch, you handpicked every single thread of trust I had gifted you and severed it completely.
+And do you want to know the dark, bitter comedy of it all? A part of my foolish heart still believes it was all an elaborate lie. I still cling to the silent, desperate hope that one day you will walk back through the wreckage, and I am genuinely, patiently waiting for that Vasl ki Raat—that sacred night of ultimate reunion.
+But do not worry; until that improbable day arrives, I am going nowhere. I never once claimed to you that you were my "last," because I possessed enough self-awareness to know I wasn't the kind of boy to collapse his entire life and future behind a single person. You, on the other hand, swore on your own father's life that I was your final stop—that no one would ever cross the threshold of your heart after me. Look at the cruel irony today: see what valid reasons drove you to leave, and see how I, even without a single reason, found the strength to dedicate my entire solitary existence solely to your memory.
+Now, with every rising sun, I work relentlessly to rebuild myself from the ground up—becoming stronger, sharper, and more refined across every conceivable domain: academically, physically, emotionally, mentally, financially, and spiritually. I hold onto a quiet, unspoken hope that if our paths ever cross again in the future, you will find a man completely transformed—someone you might finally view not as a memory, but as a worthy, undeniable choice.
+But until then... khair.`
+},
+
+{
+  id:"ua-005",
+  no:"V",
+  title:"Text V",
+  collection:"Undelivered Archives",
+  date:"2026-09-09",
+  text:`TEXT 5
+
+It was born of her absence. Her departure condemned me to crawl through fifty-three agonizing days—one thousand, two hundred, and seventy-four endless hours. I paced on my toes and collapsed onto my knees, ready to bleed ink into a thousand desperate confessions if only it would anchor her to my side. But on the seventeenth of July, the cold truth finally settled into my marrow: no amount of devotion can force a heart to feel what it has already chosen to reject.
+
+We shared the quiet rhythm of a life together, complete with the ordinary frictions of two bound souls. Yet our fractures never stemmed from betrayal or malicious games. My raised voice and desperate warnings were anchored in simple anxieties—a lied secret to her mother, a skipped meal, forgotten medicine, or unfinished work. I never foresaw that the very devotion she once cherished—praising me for keeping watch over her like a guardian—would overnight be rebranded as toxic, suffocating, and cruel the moment a polished stranger crossed her path. She discarded me for his fleeting shimmer, yet the true tragedy lay in her refusal to own her departure; she buried her treason beneath false complaints of my temperament and the weight of her household. But truth leaves an indelible trail. I lowered myself to plead not just with her, but with the phantom who replaced me, only to have my desperation answered with silent scorn.
+
+I still carry the ghost of her effortless grace—the cascade of her hair, the midnight whisper of her voice, and those suspended hours when the universe shrank to the boundary of our breathing. I laid my unfiltered soul at her feet, worshipping every fragile memory we sculpted, which only made the architecture of her exit so exquisitely lethal. It was an art form, the way she cradled my spirit in her palms before letting it shatter against the floor. Even now, amidst the wreckage, I have not retreated a single inch from where she abandoned me. I remain anchored to the exact coordinate of my destruction, counting every relentless sunrise, tracing her digital shadow through the void just to witness the life she constructs without me. I am a prisoner to my own delusion, sustained entirely by the fragile hope of a final vasl ki raat—that sacred night of reunion when she wanders back through the ruins of what we used to be.
+
+July seventeenth severed the thread of who I was. I ceased to be the quiet scholar fixated on grade point averages and neat lecture summaries; her coldness set fire to an ambition that far outstrips classroom metrics. I can glimpse the abyss below, yet I refuse to measure my worth by paper marks alone. The academic ledgers will hold their standard, but my hands are now set on building a monument out of this devastation.
+
+This fire is not forged from malice or rage—I carry the same unconditional love, waiting at the threshold for her return. It is the raw agony of fifty-three days spent under the weight of utter humiliation. That is an eternity for a soul to endure. Now, I crave the return of my dignity with a ravenous hunger. I will drive myself through infinite cycles of mastery—from drafting verses to engineering code, from soldering physical circuits to navigating distant highways at full speed. I will force the world to recognize what was lost, until the day my name is etched upon the deep maroon cover of diplomatic authority.
+
+It was never anger; it was the quiet, brutal horror of realizing that giving someone your entire world cannot stop them from rendering you invisible.`
+},
+
+{
+  id:"bl-001",
+  no:"",
+  title:"Beliefs",
+  collection:"Beliefs",
+  date:"",
+  text:`Beliefs
+
+The "I" inside me never died.
+It was killed.
+
+Killed with the blades of beliefs—
+Beliefs which were believed to be believed
+Beyond the boundaries,
+Beside the berths,
+Behind the blows,
+Even before birth.
+
+I denied those beliefs,
+I denied false relief,
+I took a stand for myself,
+And denied to believe.
+
+The reason was not arrogance;
+It was agony.
+Agony not of fear-pain,
+But the agony of all—AGAIN.
+
+"Again" is not always "a gain"—
+At least for me, at least for my self,
+Overall, for myself.
+
+I also once lived,
+I was also once betrayed.
+The betrayal was not by, but for me,
+Because I also once believed.
+
+The belief was beyond the boundaries,
+Beside the berths,
+Behind the blows,
+Even before birth.
+
+I didn't believe in beliefs,
+Nor in stereotypes.
+I actually believed in HER,
+'Cause I found that she was my type.
+
+I believed her lashes to be a labyrinth,
+And her hair not like silk,
+'Cause silk itself was supposed
+To be like her hair.
+
+I believed her to be divine,
+Her eyes like ages back—the wine.
+Her skin was fragile enough to fade in the sun,
+Even while covered,
+And hard enough to make the sun fade,
+When uncovered.
+
+Every eve she gets—
+Uncovered by the shadows of the sun,
+Dried by the waves at the coast,
+Eventually as NOTHING—at cost.
+
+Every morning she gives—
+Color to the feathers of butterflies,
+Strength to the wings of birds,
+Flowers gain fragrance from her,
+And I gained all this through my—BELIEF.
+
+My belief was something
+Which made me believe
+In her spiritual divines,
+Even when she was barely human.
+
+One night I saw her—hiding the moon
+In the furnace of her room.
+Those very same hands
+Were insisting on forging blades
+In the dark of the noon—
+Hands that wore bangles
+That bloom.
+
+She not only cut my throat
+And let me free to flee;
+She wrapped her arms around my soul,
+And postponed my death as a whole.
+
+My death was not tragic;
+It was a tremendous art.
+The "I" inside me never died.
+It was killed.
+
+Not killed with cruelty,
+Not with simply stopping beats,
+Not by allowing my eyes to close,
+Not even by holding breaths.
+
+The lingerings were lethal;
+She felt too lazy to grant me rest.
+She was counting the drops
+Leaving my veins, as if for a blood test.
+
+She first placed a knife on my face,
+And then slid it with grace.
+I screamed, held her tighter;
+Her sweat was salty, she came closer,
+And gave me an embrace.
+
+The embrace enhanced the pain,
+But the pain was sweet.
+The salt was sweet,
+The blood was sweet,
+Her smell was sweet,
+The sharpness sweet.
+The sweets were not that sweet,
+But her sounding harmless was sweet.
+
+She came closer to me,
+Pulled my waist toward her,
+One hand on my neck,
+The other unpinning buttons.
+She pushed me to lie down,
+And whispered in my ears,
+Cuddled my head,
+And grasped my hair.
+She dragged me on the daggers—
+My back swelled,
+Bare, uncovered, and wholly naked.
+
+My eyes were drying,
+The floor was wet with blood.
+The curse was not even to get a grave;
+She kissed my head,
+And flushed me in the flood.
+
+I still believed
+She would swim,
+Come close to me,
+And I'd win.
+
+But lately I realized:
+The "I" inside me never died.
+It was killed.
+
+Killed with the blades of beliefs—
+Beliefs which were believed to be believed
+Beyond the boundaries,
+Beside the berths,
+Behind the blows,
+Even before birth.
+
+I denied those beliefs,
+I denied false relief,
+I took a stand for myself,
+And denied to believe.
+
+The reason was not arrogance;
+It was agony.
+Agony not of fear-pain,
+But the agony of all—AGAIN.
+
+
+
+"Again" is not always "a gain"—
+At least for me, at least for my self,
+Overall, for myself.
+
+-Arpit Gupta`
+},
+
+{
+  id:"pv-001",
+  no:"",
+  title:"प्रेम मे विरह>🥀",
+  collection:"Featured",
+  date:"",
+  text:`प्रेम मे विरह>🥀
+
+प्रेम मे विरह छीन लेती है पुरुषों से उनका पुरुषत्व
+नहीं भोगते नपुंसकता वे, केवल स्त्रीत्व ढोए घूमते हैं वो।
+
+छूट जाता है घर से निकलना उनका,
+दीवारे चार मात्र हज़ार हो जाती है,
+
+लेटे बैठे जहाँ भी फिर वो,
+जगह वो मात्र मज़ार हो जाती है,
+
+रहते हैं फिर वे सिमटे सिमटे
+काम काम काम बस काम रह जाता है,
+
+ढक जाती है पहचाने परतों तले
+पहले जैसा बस नाम रह जाता है,
+
+जो पुरुष छेड़े युद्ध, करे विद्रोह
+रक्त में मद मस्त, अलंकारित बस भाव रह जाता है,
+
+कर लेता है वो पुरुष सौदा खुद से,
+औरतों वाला, माँ जैसा बस स्वभाव रह जाता है,
+
+हंसते खेलते कहां मैदान नापते है फिर वो,
+लिए जंजीरें, केवल पंखे पे लटक झूमते है वो,
+
+प्रेम मे विरह छीन लेती है पुरुषों से उनका पुरुषत्व
+नहीं भोगते नपुंसकता वे, केवल स्त्रीत्व ढोए घूमते हैं वो।
+
+-अर्पित/🥀`
+},
+
+{
+  id:"hb-001",
+  no:"",
+  title:"हम से बंधे तुम, तुम से बंधा जग।।",
+  collection:"Featured",
+  date:"",
+  text:`हम से बंधे तुम, तुम से बंधा जग।।
+
+तुम से बंधा जग,
+जग से बंधा ज्ञान,
+ज्ञान से बंधे ध्यान,
+ध्यान से बंधे ईश्वर,
+ईश्वर से बंधे जड़ें,
+जड़ों से बंधे पीपल,
+पीपलों से बंधे धागे,
+धागों से बंधी उम्मीदें,
+उम्मीदों से बंधी यातनाएं,
+यातनाओं से बंधे हम,
+हम से बंधे तुम,
+तुम से बंधा जग।।
+
+तुम से बंधा जग,
+जग में बंधे भ्रम,
+भ्रम से बंधे क्रम,
+क्रम से बंधे कर्म,
+कर्मों से बंधे धर्म,
+धर्मो से बंधी आशाएं,
+आशाओं से बंधा काल,
+कालों में बंधा जीवन,
+जीवनी में बंधे श्रम,
+श्रमों मे बंधे हम,
+हम मे बंधे तुम,
+तुम से बंधा जग।
+
+तुम से बंधा जग,
+जग से बंधी आस्था,
+आस्था से बंधी सोंच,
+सोंच से बंधे हाथ,
+हाथों में बंधी लकीरें,
+लकीरों से बंधा भविष्य,
+भविष्य से बंधे सपने,
+सपनों में बंधे आज,
+आज में बंधे हम,
+हम मे बंधे तुम,
+तुम से बंधा जग।।
+
+तुम में बंधा जग,
+जग में बंधा शून्य,
+शून्यों से बंधे शिव,
+शिव से बने लिंग,
+लिंग से बंधे पत्थर,
+पत्थर से बंधे दिल,
+दिलों में बंधे प्यार,
+प्यार से बंधे हम,
+हम से बंधे तुम,
+तुम से बंधा जग।।
+
+तुम से बंधा जग,
+जग से बंधी भूख,
+भूखों से बंधा व्यापार,
+व्यापार से बंधे रिश्तें,
+रिश्तों से बने घाव,
+घावों पे बंधे जूतें,
+जूतों से बंधी चाल,
+चालों से बंधा खेल,
+खेलों में बंधे हम,
+हम से बंधे तुम,
+तुम से बंधा जग।।
+
+-अर्पित>🥀`
+}
+];
+
+/* ========================================================= */
+
+const $=s=>document.querySelector(s);
+
+const reduce=matchMedia(
+  '(prefers-reduced-motion:reduce)'
+).matches;
+
+const mobile=innerWidth<700;
+
+const fmt=d=>
+  d
+  ? d.split('-').reverse().join(' · ')
+  : 'Undated';
+
+const latest=[
+  ...POEMS
+].sort(
+  (a,b)=>
+    (b.date||'').localeCompare(a.date||'')
+    ||
+    POEMS.indexOf(b)-POEMS.indexOf(a)
+)[0];
+
+const esc=s=>
+  s.replace(
+    /[&<>]/g,
+    c=>({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;'
+    }[c])
+  );
+
+$('#stats').textContent=
+  `Est. 2026 · ${SITE.collections} collections · ${POEMS.length} writings`;
+
+$('#egg').onclick=()=>{
+  const n=$('#note');
+
+  n.textContent=SITE.secret;
+
+  n.classList.add('on');
+
+  setTimeout(
+    ()=>n.classList.remove('on'),
+    4200
+  );
+};
+
+
+/* =========================================================
+   PAGES
+   ========================================================= */
+
+let route={
+  name:'home'
+};
+
+const chip=p=>
+  `<a href="#/poem/${p.id}">
+    <small>${p.id.toUpperCase()}</small>
+    ${esc(p.title)}
+  </a>`;
+
+function render(){
+
+  const h=
+    location.hash
+      .replace(/^#\/?/,'')
+      .split('/');
+
+  const v=$('#view');
+
+  route={
+    name:h[0]||'home',
+    id:h[1]
+  };
+
+  if(
+    route.name==='poem'
+    &&
+    !POEMS.find(p=>p.id===route.id)
+  ){
+    route={
+      name:'archive'
+    };
+  }
+
+  document
+    .querySelectorAll('header nav a')
+    .forEach(
+      a=>
+        a.toggleAttribute(
+          'aria-current',
+          a.dataset.r===route.name
+        )
+    );
+
+  v.scrollTop=0;
+
+  if(route.name==='poem'){
+
+    const i=
+      POEMS.findIndex(
+        p=>p.id===route.id
+      );
+
+    const p=POEMS[i];
+
+    const pv=
+      POEMS[
+        (i+POEMS.length-1)%POEMS.length
+      ];
+
+    const nx=
+      POEMS[
+        (i+1)%POEMS.length
+      ];
+
+    document.title=
+      p.title+
+      ' — Undelivered Archives';
+
+    v.innerHTML=`
+      <div class="page">
+
+        <article class="paper">
+
+          <small>
+            UNDELIVERED ARCHIVES
+            <br>
+            ${p.no?'TEXT '+p.no+' · ':''}
+            ${fmt(p.date)}
+            ·
+            ${p.collection.toUpperCase()}
+          </small>
+
+          <h1>${esc(p.title)}</h1>
+
+          <pre>${esc(p.text)}</pre>
+
+        </article>
+
+        <nav class="pager" aria-label="Letters">
+
+          <a href="#/poem/${pv.id}">
+            ← Previous letter
+          </a>
+
+          <a href="#/archive">
+            The archive
+          </a>
+
+          <a href="#/poem/${nx.id}">
+            Next letter →
+          </a>
+
+        </nav>
+
+      </div>
+    `;
+
+  }
+
+  else if(route.name==='archive'){
+
+    document.title=
+      'Archive — Undelivered Archives';
+
+    v.innerHTML=`
+
+      <section class="arch">
+
+        <h2>The Archive</h2>
+
+        <p>
+          Turn it with your mouse or finger.
+          Choose a letter to open its page.
+        </p>
+
+        <input
+          id="q"
+          type="search"
+          placeholder="Search the archive..."
+          aria-label="Search the archive"
+        >
+
+        <div class="chips" id="chips">
+          ${POEMS.map(chip).join('')}
+        </div>
+
+      </section>
+    `;
+
+    $('#q').oninput=e=>{
+
+      const q=
+        e.target.value.toLowerCase();
+
+      $('#chips').innerHTML=
+        POEMS
+          .filter(
+            p=>
+              (
+                p.title+
+                p.text+
+                p.collection
+              )
+              .toLowerCase()
+              .includes(q)
+          )
+          .map(chip)
+          .join('')
+        ||
+        '<span>Nothing filed under that.</span>';
+    };
+
+  }
+
+  else if(route.name==='about'){
+
+    document.title=
+      'About — Undelivered Archives';
+
+    v.innerHTML=`
+
+      <section class="about">
+
+        <p>Arpit Gupta</p>
+
+        <p>
+          ${esc(SITE.bio)}
+        </p>
+
+        <small>
+          ${
+            Object
+              .entries(SITE.links)
+              .map(
+                ([k,x])=>
+                  x
+                  ? `<a href="${x}">${k}</a>`
+                  : `${k}: add in SITE.links`
+              )
+              .join('<br>')
+          }
+        </small>
+
+      </section>
+    `;
+
+  }
+
+  else{
+
+    route.name='home';
+
+    document.title=
+      'Undelivered Archives — Arpit Gupta';
+
+    v.innerHTML=`
+
+      <section class="home">
+
+        <small>
+          ARPIT GUPTA
+        </small>
+
+        <h1>
+          Undelivered
+          <i>Archives</i>
+        </h1>
+
+        <p>
+          ${SITE.tagline}
+        </p>
+
+        <a
+          class="btn"
+          href="#/archive"
+        >
+          Enter the archive →
+        </a>
+
+        <a
+          class="btn"
+          href="#/poem/${latest.id}"
+        >
+          Read the latest letter
+        </a>
+
+      </section>
+    `;
+  }
+}
+
+addEventListener(
+  'hashchange',
+  render
+);
+
+render();
+
+
+/* =========================================================
+   3D WORLD
+   ========================================================= */
+
+let world=null;
+
+try{
+
+  const cv=$('#c');
+
+  const R=
+    new THREE.WebGLRenderer({
+      canvas:cv,
+      antialias:!mobile
+    });
+
+  R.setPixelRatio(
+    Math.min(
+      devicePixelRatio,
+      mobile?1.5:2
+    )
+  );
+
+  const S=
+    new THREE.Scene();
+
+  const cam=
+    new THREE.PerspectiveCamera(
+      50,
+      1,
+      .1,
+      200
+    );
+
+
+  /* ---------- NEBULA SKY ---------- */
+
+  const sky=
+    new THREE.Mesh(
+
+      new THREE.SphereGeometry(
+        90,
+        32,
+        16
+      ),
+
+      new THREE.ShaderMaterial({
+
+        side:THREE.BackSide,
+
+        depthWrite:false,
+
+        uniforms:{
+          t:{
+            value:0
+          }
+        },
+
+        vertexShader:`
+          varying vec3 d;
+
+          void main(){
+
+            d=normalize(position);
+
+            gl_Position=
+              projectionMatrix*
+              modelViewMatrix*
+              vec4(position,1.);
+
+          }
+        `,
+
+        fragmentShader:`
+          varying vec3 d;
+
+          uniform float t;
+
+          float h(vec3 p){
+            return fract(
+              sin(
+                dot(
+                  p,
+                  vec3(
+                    127.1,
+                    311.7,
+                    74.7
+                  )
+                )
+              )
+              *43758.5453
+            );
+          }
+
+          float n(vec3 p){
+
+            vec3 i=floor(p);
+            vec3 f=fract(p);
+
+            f=f*f*(3.-2.*f);
+
+            return mix(
+              mix(
+                mix(
+                  h(i),
+                  h(i+vec3(1,0,0)),
+                  f.x
+                ),
+
+                mix(
+                  h(i+vec3(0,1,0)),
+                  h(i+vec3(1,1,0)),
+                  f.x
+                ),
+
+                f.y
+              ),
+
+              mix(
+                mix(
+                  h(i+vec3(0,0,1)),
+                  h(i+vec3(1,0,1)),
+                  f.x
+                ),
+
+                mix(
+                  h(i+vec3(0,1,1)),
+                  h(i+vec3(1,1,1)),
+                  f.x
+                ),
+
+                f.y
+              ),
+
+              f.z
+            );
+          }
+
+          float fbm(vec3 p){
+
+            float a=.5;
+            float s=0.;
+
+            for(int i=0;i<5;i++){
+
+              s+=a*n(p);
+
+              p*=2.02;
+              a*=.5;
+            }
+
+            return s;
+          }
+
+          void main(){
+
+            vec3 p=d*2.2;
+
+            float w=
+              fbm(
+                p+
+                vec3(
+                  t*.02,
+                  0,
+                  t*.015
+                )
+              );
+
+            float q=
+              fbm(
+                p*1.6+
+                w*2.-
+                t*.02
+              );
+
+            vec3 c=
+              mix(
+                vec3(.02,.03,.08),
+                vec3(.08,.16,.32),
+                smoothstep(.25,.75,q)
+              );
+
+            c+=
+              vec3(.95,.5,.15)*
+              pow(
+                smoothstep(
+                  .55,
+                  .9,
+                  w*q*2.2
+                ),
+                2.
+              )*
+              .55;
+
+            c+=
+              vec3(.2,.7,.65)*
+              pow(
+                smoothstep(
+                  .6,
+                  .95,
+                  fbm(p*2.+5.)
+                ),
+                3.
+              )*
+              .35;
+
+            float st=
+              step(
+                .9985,
+                h(floor(d*260.))
+              );
+
+            c+=st*.8;
+
+            gl_FragColor=
+              vec4(c,1.);
+          }
+        `
+      })
+    );
+
+  S.add(sky);
+
+
+  /* ---------- GLOW ---------- */
+
+  const glowTex=(()=>{
+
+    const c=
+      document.createElement('canvas');
+
+    c.width=c.height=128;
+
+    const g=
+      c.getContext('2d');
+
+    const r=
+      g.createRadialGradient(
+        64,
+        64,
+        0,
+        64,
+        64,
+        64
+      );
+
+    r.addColorStop(
+      0,
+      'rgba(255,190,100,.9)'
+    );
+
+    r.addColorStop(
+      .4,
+      'rgba(255,150,60,.25)'
+    );
+
+    r.addColorStop(
+      1,
+      'rgba(255,150,60,0)'
+    );
+
+    g.fillStyle=r;
+
+    g.fillRect(
+      0,
+      0,
+      128,
+      128
+    );
+
+    return new THREE.CanvasTexture(c);
+
+  })();
+
+
+  /* ---------- AMBIENT LETTER SWARM ---------- */
+
+  const N=
+    mobile
+    ? 140
+    : 420;
+
+  const geo=
+    new THREE.PlaneGeometry(
+      .7,
+      .48
+    );
+
+  const mat=
+    new THREE.MeshBasicMaterial({
+      side:THREE.DoubleSide,
+      transparent:true,
+      opacity:.85
+    });
+
+  const sw=
+    new THREE.InstancedMesh(
+      geo,
+      mat,
+      N
+    );
+
+  const D=
+    new THREE.Object3D();
+
+  const P=[];
+
+  for(let i=0;i<N;i++){
+
+    P.push({
+      r:7+Math.random()*22,
+      a:Math.random()*6.28,
+      y:(Math.random()-.5)*16,
+      s:.02+Math.random()*.06,
+      f:Math.random()*6,
+      k:.6+Math.random()*.8
+    });
+
+    sw.setColorAt(
+      i,
+      new THREE.Color()
+        .setHSL(
+          .09+Math.random()*.03,
+          .35+Math.random()*.3,
+          .65+Math.random()*.25
+        )
+    );
+  }
+
+  S.add(sw);
+
+
+  /* ---------- REAL LETTERS ---------- */
+
+  const ring=
+    new THREE.Group();
+
+  S.add(ring);
+
+  const L=[];
+
+  const Rr=4.6;
+
+  const n=POEMS.length;
+
+  POEMS.forEach((p,i)=>{
+
+    const a=
+      i/n*Math.PI*2;
+
+    const g=
+      new THREE.Group();
+
+    const y=
+      (i-(n-1)/2)*.75;
+
+    const c=
+      document.createElement('canvas');
+
+    c.width=512;
+    c.height=340;
+
+    const x=
+      c.getContext('2d');
+
+    x.fillStyle='#f3ecdc';
+
+    x.fillRect(
+      0,
+      0,
+      512,
+      340
+    );
+
+    x.fillStyle='#1b1610';
+
+    x.textAlign='center';
+
+    x.font=
+      'italic 600 40px Georgia';
+
+    x.fillText(
+      p.title,
+      256,
+      175
+    );
+
+    x.font=
+      '18px Georgia';
+
+    x.fillText(
+      'ARCHIVE / '+
+      p.id
+        .toUpperCase()
+        .replace('-',' / '),
+      256,
+      225
+    );
+
+    x.fillText(
+      fmt(p.date),
+      256,
+      255
+    );
+
+    const m=
+      new THREE.Mesh(
+
+        new THREE.BoxGeometry(
+          1.8,
+          1.2,
+          .05
+        ),
+
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+        .map(
+          ()=>
+            new THREE.MeshBasicMaterial({
+              color:0xd9cdb0
+            })
+        )
+        .concat([
+          new THREE.MeshBasicMaterial({
+            map:
+              new THREE.CanvasTexture(c)
+          }),
+
+          new THREE.MeshBasicMaterial({
+            color:0xcbbf9f
+          })
+        ])
+      );
+
+
+    const seal=
+      new THREE.Mesh(
+
+        new THREE.CylinderGeometry(
+          .12,
+          .12,
+          .04,
+          20
+        ),
+
+        new THREE.MeshBasicMaterial({
+          color:0xd8492f
+        })
+      );
+
+    seal.rotation.x=
+      Math.PI/2;
+
+    seal.position.set(
+      0,
+      .5,
+      .05
+    );
+
+
+    const gl=
+      new THREE.Sprite(
+
+        new THREE.SpriteMaterial({
+          map:glowTex,
+          blending:
+            THREE.AdditiveBlending,
+          depthWrite:false,
+          transparent:true
+        })
+      );
+
+    gl.scale.set(
+      4.6,
+      3.6,
+      1
+    );
+
+    gl.position.z=-.1;
+
+
+    g.add(
+      gl,
+      m,
+      seal
+    );
+
+    g.position.set(
+      Math.sin(a)*Rr,
+      y,
+      Math.cos(a)*Rr
+    );
+
+    g.rotation.y=a;
+
+    ring.add(g);
+
+    m.userData.i=i;
+
+    L.push({
+      g,
+      m,
+      a,
+      y,
+      h:0,
+      gl
+    });
+
+  });
+
+
+  /* ---------- EMBER DUST ---------- */
+
+  const M=
+    mobile
+    ? 120
+    : 400;
+
+  const dp=
+    new Float32Array(M*3);
+
+  for(
+    let i=0;
+    i<M*3;
+    i++
+  ){
+    dp[i]=
+      (Math.random()-.5)*36;
+  }
+
+  const dg=
+    new THREE.BufferGeometry();
+
+  dg.setAttribute(
+    'position',
+    new THREE.BufferAttribute(
+      dp,
+      3
+    )
+  );
+
+  S.add(
+    new THREE.Points(
+
+      dg,
+
+      new THREE.PointsMaterial({
+        color:0xffc27a,
+        size:.06,
+        transparent:true,
+        opacity:.7,
+        blending:
+          THREE.AdditiveBlending,
+        depthWrite:false
+      })
+    )
+  );
+
+
+  /* ---------- INPUT ---------- */
+
+  const ray=
+    new THREE.Raycaster();
+
+  const mp=
+    new THREE.Vector2();
+
+  const mouse={
+    x:0,
+    y:0
+  };
+
+  let hov=-1;
+  let drag=0;
+  let lx=0;
+  let vel=0;
+  let moved=0;
+
+
+  const pos=e=>{
+
+    const r=
+      cv.getBoundingClientRect();
+
+    mp.set(
+      (e.clientX/r.width)*2-1,
+      -(e.clientY/r.height)*2+1
+    );
+
+    mouse.x=mp.x;
+    mouse.y=mp.y;
+  };
+
+
+  const pick=()=>{
+
+    ray.setFromCamera(
+      mp,
+      cam
+    );
+
+    const h=
+      ray.intersectObjects(
+        L.map(l=>l.m)
+      )[0];
+
+    return h
+      ? h.object.userData.i
+      : -1;
+  };
+
+
+  addEventListener(
+    'pointermove',
+    e=>{
+
+      pos(e);
+
+      if(drag){
+
+        vel=
+          (e.clientX-lx)*.006;
+
+        moved+=
+          Math.abs(
+            e.clientX-lx
+          );
+
+        lx=e.clientX;
+      }
+
+      if(
+        e.target===cv
+        ||
+        e.target.id==='view'
+      ){
+
+        hov=
+          route.name==='poem'
+          ? -1
+          : pick();
+
+        cv.style.cursor=
+          hov>=0
+          ? 'pointer'
+          : 'default';
+      }
+
+    }
+  );
+
+
+  addEventListener(
+    'pointerdown',
+    e=>{
+
+      if(
+        e.target.closest(
+          'a,button,input,.paper,.about'
+        )
+      ){
+        return;
+      }
+
+      drag=1;
+      lx=e.clientX;
+      moved=0;
+
+    }
+  );
+
+
+  addEventListener(
+    'pointerup',
+    e=>{
+
+      drag=0;
+
+      if(
+        moved<6
+        &&
+        (
+          e.target===cv
+          ||
+          e.target.id==='view'
+        )
+        &&
+        route.name!=='poem'
+      ){
+
+        pos(e);
+
+        const i=pick();
+
+        if(i>=0){
+
+          location.hash=
+            '#/poem/'+
+            POEMS[i].id;
+        }
+      }
+
+    }
+  );
+
+
+  /* ---------- RESIZE ---------- */
+
+  function size(){
+
+    const w=innerWidth;
+    const h=innerHeight;
+
+    R.setSize(
+      w,
+      h,
+      false
+    );
+
+    cam.aspect=
+      w/h;
+
+    cam.updateProjectionMatrix();
+  }
+
+  addEventListener(
+    'resize',
+    size
+  );
+
+  size();
+
+
+  /* ---------- ANIMATION ---------- */
+
+  let spin=0;
+  let vis=true;
+
+  new IntersectionObserver(
+    a=>
+      vis=
+        a[0].isIntersecting
+  ).observe(cv);
+
+
+  const look=
+    new THREE.Vector3();
+
+  const tgt=
+    new THREE.Vector3();
+
+  const tl=
+    new THREE.Vector3();
+
+  cam.position.set(
+    0,
+    2,
+    30
+  );
+
+
+  const wrap=a=>
+    Math.atan2(
+      Math.sin(a),
+      Math.cos(a)
+    );
+
+  const clk=
+    new THREE.Clock();
+
+
+  (function tick(){
+
+    requestAnimationFrame(tick);
+
+    if(
+      !vis
+      ||
+      document.hidden
+    ){
+      return;
+    }
+
+    const t=
+      clk.getElapsedTime();
+
+    const m=
+      reduce
+      ? 0
+      : 1;
+
+    const wide=
+      innerWidth/innerHeight<1
+      ? 1.5
+      : 1;
+
+    sky.material.uniforms.t.value=
+      t*m;
+
+
+    /* ---------- SWARM ---------- */
+
+    for(
+      let i=0;
+      i<N;
+      i++
+    ){
+
+      const p=P[i];
+
+      const a=
+        p.a+
+        t*p.s*m;
+
+      D.position.set(
+        Math.cos(a)*p.r,
+        p.y+
+          Math.sin(
+            t*p.k+p.f
+          )*.6*m,
+        Math.sin(a)*p.r-8
+      );
+
+      D.rotation.set(
+        t*.4*p.k*m+p.f,
+        a*2+t*.2*m,
+        p.f
+      );
+
+      D.updateMatrix();
+
+      sw.setMatrixAt(
+        i,
+        D.matrix
+      );
+    }
+
+    sw.instanceMatrix.needsUpdate=true;
+
+
+    /* ---------- CAMERA ---------- */
+
+    const r=route.name;
+
+    let sp=.0016*m;
+
+    if(r==='home'){
+
+      tgt.set(
+        0,
+        .6,
+        17*wide
+      );
+
+      tl.set(
+        0,
+        0,
+        0
+      );
+
+    }
+
+    else if(r==='archive'){
+
+      tgt.set(
+        0,
+        .8,
+        10.5*wide
+      );
+
+      tl.set(
+        0,
+        0,
+        0
+      );
+
+    }
+
+    else if(r==='about'){
+
+      tgt.set(
+        -6,
+        3,
+        14
+      );
+
+      tl.set(
+        2,
+        0,
+        0
+      );
+
+    }
+
+    else{
+
+      const i=
+        POEMS.findIndex(
+          p=>p.id===route.id
+        );
+
+      const l=L[i];
+
+      sp=0;
+
+      spin+=
+        wrap(
+          -l.a-spin
+        )*.05;
+
+      tgt.set(
+        0,
+        l.y+.2,
+        Rr+3.2
+      );
+
+      tl.set(
+        0,
+        l.y,
+        Rr
+      );
+
+    }
+
+
+    if(drag){
+
+      spin+=vel;
+      sp=0;
+
+    }
+
+    else{
+
+      spin+=vel;
+
+      vel*=.94;
+
+    }
+
+    spin+=sp;
+
+    ring.rotation.y=spin;
+
+
+    tgt.x+=
+      mouse.x*
+      1.2*
+      m;
+
+    tgt.y+=
+      mouse.y*
+      .6*
+      m;
+
+
+    cam.position.lerp(
+      tgt,
+      reduce
+      ? 1
+      : .04
+    );
+
+    look.lerp(
+      tl,
+      reduce
+      ? 1
+      : .06
+    );
+
+    cam.lookAt(look);
+
+
+    /* ---------- LETTER HOVER ---------- */
+
+    L.forEach(
+      (l,i)=>{
+
+        l.h+=
+          (
+            (
+              hov===i
+              &&
+              r!=='poem'
+              ?1
+              :0
+            )
+            -
+            l.h
+          )*.12;
+
+        const s=
+          1+
+          l.h*.18+
+          (
+            r==='poem'
+            &&
+            POEMS[i].id===route.id
+            ? .4
+            :0
+          );
+
+        l.g.scale.setScalar(s);
+
+        l.g.position.y=
+          l.y+
+          Math.sin(
+            t*.7+i
+          )*.08*m;
+
+        l.gl.material.opacity=
+          r==='poem'
+          ? (
+              POEMS[i].id===route.id
+              ?1
+              :.15
+            )
+          :.55+
+            l.h*.45;
+
+      }
+    );
+
+
+    /* ---------- DUST ---------- */
+
+    const a=
+      dg.attributes.position;
+
+    for(
+      let i=0;
+      i<M;
+      i++
+    ){
+
+      a.array[i*3+1]+=
+        .004*m;
+
+      if(
+        a.array[i*3+1]>18
+      ){
+
+        a.array[i*3+1]=-18;
+
+      }
+
+    }
+
+    a.needsUpdate=true;
+
+
+    R.render(
+      S,
+      cam
+    );
+
+  })();
+
+  world=true;
+
+}
+catch(e){
+
+  $('#c').style.display='none';
+
+}
+
+</script>
+
+</body>
+</html>
